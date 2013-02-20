@@ -1,5 +1,5 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import (render, render_to_response, get_object_or_404)
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.utils import simplejson as json
 from django.template import RequestContext
 from django.core.validators import URLValidator
@@ -16,6 +16,7 @@ def get_url(request):
     validate = URLValidator(verify_exists=True)
     data={}
     try:
+        # validate url for exitence as well valid syntax
         validate(url)
         content = urllib2.urlopen(url)
         soup = BeautifulSoup(content)
@@ -23,13 +24,12 @@ def get_url(request):
         imgs = soup.findAll("img",{"width":True})
         imgslist,width,height = [],0,0
         for i in imgs:
-            print i
             width = int(i["width"])
-            print width
             if width > 200:
+                # Only appen images larger than 200px in width
                 imgslist.append(i["src"])
+        # We are only taking the first image in list
         data['imgs'] = imgslist[0]
-        print imgslist
         return HttpResponse(json.dumps(dict(code=1,content=data)))
     except ValidationError, e:
         return HttpResponse(json.dumps(dict(code=0,msg="Invalid Url")))
