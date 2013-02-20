@@ -1,0 +1,63 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style.css" media="screen" />
+<div class="wrap">
+    <h1>Fetch Link Details</h1>
+    <div id="atc_bar" align="center">
+        <form id="frmurl">
+            Paste Link Here: <input type="text" name="url" size="50" id="url" value="" />
+            <input type="button" name="submit" value="submit" id="submit" />
+            <label class="error" id="err_msg"></label>
+            {% csrf_token %}
+        </form>
+        <div id="loader">
+
+            <div align="center" id="atc_loading" style="display:none"><br/><br/><br/><img src="static/325.gif" alt="Loading" />
+        </div>
+        <br/>
+            <div id="attach_content" style="display:none" class="atcbrd-dash">
+                <br/>
+                <div id="atc_images"></div>
+                <div id="atc_info">
+
+                    <label id="atc_title"></label>
+                    <label id="atc_url"></label>
+                    <br clear="all" />
+                    <label id="atc_desc"></label>
+                    <br clear="all" />
+                </div>
+                <br clear="all" />
+            </div>
+        </div>
+        <br clear="all" />
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $("#submit").click(function(){
+        var data = $("#frmurl").serialize();
+        if(url){
+            $("#err_msg").html("");
+            $("#atc_loading").show();
+            $('#atc_url').html($('#url').val());
+            $("#attach_content").hide();
+            $.post("get-url",data,function(resp){
+                var html = $.parseJSON(resp);
+                if (html.code == 1)
+                {
+                    $("#atc_loading").hide();
+                    $("#atc_title").text(html.content.title);
+                    $("#atc_images").html('<img src="'+html.content.imgs+'" width="150" height="100">');
+                    $('#attach_content').fadeIn('slow');
+                    $("#err_msg").html("");
+                }
+                else
+                {
+                    $("#atc_loading").hide();
+                    $("#err_msg").html("Invalid Url.Please check the url and try again.");
+                }
+            });
+        }
+    });
+
+});
+</script>

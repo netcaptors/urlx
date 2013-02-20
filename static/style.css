@@ -1,0 +1,60 @@
+body{
+    background:#f9f9f9 url(http://tympanus.net/Tutorials/OriginalHoverEffects/images/white_texture.jpg) repeat top left;
+    color: #333;
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+    color: #4A4A4A ;
+}
+
+.wrap {
+    width: 500px;
+    height: 250px;
+    margin: 20px auto;
+    display: block;
+    padding:20px;
+    cursor: default;
+    background-color: #FFF;
+    -webkit-box-shadow:0 5px 10px #666;
+    -moz-box-shadow:0 5px 10px #666;
+    box-shadow:0 5px 10px #666;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -o-border-radius:5px;
+    border-radius:5px;
+}
+
+#atc_images {width:100px;height:120px;overflow:hidden;float:left;}
+#atc_info {width:350px;float:left;height:100px;text-align:left;margin-left:10px; padding:0 10px;}
+#atc_title {font-size:14px;display:block;}
+#atc_url {font-size:10px;display:block;}
+#atc_desc {font-size:12px;}
+.atcbrd-dash{
+    border-top: 1px dashed #BBB;
+    border-bottom: 1px solid #CCC;
+}
+
+.error{
+    color:red;
+}
+
+p{
+    margin-top: 15px;
+    text-align: justify;
+}
+
+h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+a{
+    text-decoration: none;
+    color: #4A4A4A !important;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #6B6B6B !important ;
+}
